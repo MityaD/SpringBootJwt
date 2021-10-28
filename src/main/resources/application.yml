@@ -1,0 +1,17 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    password: yakushik
+    username: yakushik
+    url: jdbc:postgresql://localhost:5432/yakushik_db
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    generate-ddl: true
+    database: postgresql
+
+jwt:
+  secretKey: proselyte
+  header: Autherization
+  expiration: 604800
