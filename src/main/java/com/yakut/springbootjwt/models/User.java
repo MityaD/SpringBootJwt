@@ -16,7 +16,7 @@ import java.util.Collection;
 @Builder
 @Table(name = "users")
 @JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"}, ignoreUnknown = true)
-public class User implements UserDetails, Serializable {
+public class User implements UserDetails, Serializable { // todo насколько я помню userDetails impl serializable
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -36,7 +36,7 @@ public class User implements UserDetails, Serializable {
     @Column(name = "status")
     private Status status;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)//todo тут по умолчанию игорь
     private Address address;
 
     public User(String firstName, String lastName, Integer age) {
