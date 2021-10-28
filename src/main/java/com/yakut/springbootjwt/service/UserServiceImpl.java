@@ -12,7 +12,7 @@ import java.util.List;
 
 @Service
 @Transactional
-@AllArgsConstructor
+@AllArgsConstructor// todo не та аннотация
 @Slf4j
 public class UserServiceImpl implements UserService{
 
@@ -22,7 +22,7 @@ public class UserServiceImpl implements UserService{
     public User saveUser(User user) throws UserNotSavedToDataBaseException {
         try {
             log.info("User saved to DB");
-            return userRepository.saveAndFlush(user);
+            return userRepository.saveAndFlush(user);//todo ты заебал бездумно копировать баню) там это сделано с определенной целью, и то уже можно выпилить, я сделал другое
         } catch (DataIntegrityViolationException e) {
             throw new UserNotSavedToDataBaseException("Ошибка записи пользователя в базу данных", e);
         }
@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService{
     @Override
     public User getUserById(Long id) {
         log.info("Getting User by id " + id);
-        return userRepository.getById(id);
+        return userRepository.getById(id);//todo лучше использовать findBy
     }
 
     @Override
@@ -56,7 +56,7 @@ public class UserServiceImpl implements UserService{
 
     @Transactional
     @Override
-    public void updateUser(Long id, User user) throws UserNotSavedToDataBaseException {
+    public void updateUser(Long id, User user) throws UserNotSavedToDataBaseException {// todo зачем все что там внутри????
         User byDbUser = userRepository.getById(id);
         if (user.getFirstName() != null) byDbUser.setFirstName(user.getFirstName());
         if (user.getLastName() != null) byDbUser.setLastName(user.getLastName());
@@ -68,7 +68,7 @@ public class UserServiceImpl implements UserService{
 
         log.info("User by id " + byDbUser + " updated and save to database");
         try {
-            userRepository.saveAndFlush(byDbUser);
+            userRepository.saveAndFlush(byDbUser);// todo сверху уже написал
         } catch (DataIntegrityViolationException e) {
             throw new UserNotSavedToDataBaseException("Ошибка записи пользователя в базу данных при обновлении", e);
         }
