@@ -15,9 +15,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final JwtConfigurer jwtConfigurer;
+    private final JwtConfigurer jwtConfigurer; 
 
-    public SecurityConfig(JwtConfigurer jwtConfigurer) {
+    public SecurityConfig(JwtConfigurer jwtConfigurer) { //todo лобмок зачем если ты им не пользуешься
         this.jwtConfigurer = jwtConfigurer;
     }
 
