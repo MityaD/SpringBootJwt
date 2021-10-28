@@ -12,7 +12,7 @@ import java.util.Collection;
 import java.util.List;
 
 @Data
-@AllArgsConstructor
+@AllArgsConstructor// todo зачем из два
 public class SecurityUser implements UserDetails {
 
     private final String firstName;
