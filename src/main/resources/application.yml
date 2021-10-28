@@ -15,3 +15,5 @@ jwt:
   secretKey: proselyte
   header: Autherization
   expiration: 604800
+server:
+  port: 8081

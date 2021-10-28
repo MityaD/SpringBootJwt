@@ -1,4 +1,4 @@
-package com.yakut.springbootjwt.security;
+package com.yakut.springbootjwt.config;
 
 import lombok.AllArgsConstructor;
 import org.springframework.security.config.annotation.SecurityConfigurerAdapter;

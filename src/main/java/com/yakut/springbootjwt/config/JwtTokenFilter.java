@@ -1,5 +1,6 @@
-package com.yakut.springbootjwt.security;
+package com.yakut.springbootjwt.config;
 
+import com.yakut.springbootjwt.exception.JwtAuthenticationException;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;

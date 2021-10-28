@@ -1,4 +1,4 @@
-package com.yakut.springbootjwt.restcontroller;
+package com.yakut.springbootjwt.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

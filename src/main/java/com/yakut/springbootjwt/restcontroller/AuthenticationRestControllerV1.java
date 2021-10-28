@@ -1,8 +1,9 @@
 package com.yakut.springbootjwt.restcontroller;
 
+import com.yakut.springbootjwt.dto.AuthenticationRequestDTO;
 import com.yakut.springbootjwt.models.User;
 import com.yakut.springbootjwt.repository.UserRepository;
-import com.yakut.springbootjwt.security.JwtTokenProvider;
+import com.yakut.springbootjwt.config.JwtTokenProvider;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;

@@ -1,11 +1,8 @@
-package com.yakut.springbootjwt.security;
+package com.yakut.springbootjwt.config;
 
-import com.yakut.springbootjwt.models.User;
-import com.yakut.springbootjwt.service.UserService;
+import com.yakut.springbootjwt.exception.JwtAuthenticationException;
 import io.jsonwebtoken.*;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

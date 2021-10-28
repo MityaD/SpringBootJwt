@@ -1,4 +1,4 @@
-package com.yakut.springbootjwt.security;
+package com.yakut.springbootjwt.exception;
 
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
