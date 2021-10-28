@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
-public class UserDetailsServiceImpl implements UserDetailsService {
+public class UserDetailsServiceImpl implements UserDetailsService { //todo ты прежде чем повторять подумал бы. почему в прошлой задачи ты сделал норм, а сейчас решил льжельный сервис сделать и засунуть его в жопу мира.
 
     private final UserRepository userRepository;
 
