@@ -3,9 +3,10 @@ package com.yakut.springbootjwt.models;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
-import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 
 @Entity
@@ -16,7 +17,7 @@ import java.util.Collection;
 @Builder
 @Table(name = "users")
 @JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"}, ignoreUnknown = true)
-public class User implements UserDetails, Serializable { // todo насколько я помню userDetails impl serializable
+public class User implements UserDetails{
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -36,25 +37,12 @@ public class User implements UserDetails, Serializable { // todo насколь�
     @Column(name = "status")
     private Status status;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)//todo тут по умолчанию игорь
+    @OneToOne(cascade = CascadeType.ALL)
     private Address address;
-
-    public User(String firstName, String lastName, Integer age) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.age = age;
-    }
-
-    public User(Long id, String firstName, String lastName, Integer age) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.age = age;
-    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return role.getAuthorities();
+        return new ArrayList<SimpleGrantedAuthority>();
     }
 
     @Override
@@ -74,11 +62,22 @@ public class User implements UserDetails, Serializable { // todo насколь�
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public static UserDetails fromUser(User user) {
+        return new org.springframework.security.core.userdetails.User(
+                user.getFirstName(), user.getPassword(),
+                user.getStatus().equals(Status.ACTIVE),
+                user.getStatus().equals(Status.ACTIVE),
+                user.getStatus().equals(Status.ACTIVE),
+                user.getStatus().equals(Status.ACTIVE),
+                user.getRole().getAuthorities()
+        );
     }
 }

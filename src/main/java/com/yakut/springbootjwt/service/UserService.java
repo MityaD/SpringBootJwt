@@ -1,20 +1,26 @@
 package com.yakut.springbootjwt.service;
 
+import com.yakut.springbootjwt.exception.NoUserUnderThisId;
 import com.yakut.springbootjwt.exception.UserNotSavedToDataBaseException;
 import com.yakut.springbootjwt.models.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+
 import java.util.List;
 
-public interface UserService{
+public interface UserService extends UserDetailsService {
 
     User saveUser(User user) throws UserNotSavedToDataBaseException;
 
     List<User> getAllUsers();
 
-    User getUserById(Long id);
+    User findUserById(Long id) throws NoUserUnderThisId;
 
     void deleteAllUsers();
 
     void deleteUserById(Long id);
 
-    void updateUser(Long id, User user) throws UserNotSavedToDataBaseException;
+    @Override
+    UserDetails loadUserByUsername(String firstName) throws UsernameNotFoundException;
 }

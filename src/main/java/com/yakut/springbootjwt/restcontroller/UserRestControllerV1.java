@@ -1,8 +1,10 @@
 package com.yakut.springbootjwt.restcontroller;
 
+import com.yakut.springbootjwt.exception.NoUserUnderThisId;
 import com.yakut.springbootjwt.exception.UserNotSavedToDataBaseException;
 import com.yakut.springbootjwt.models.User;
 import com.yakut.springbootjwt.service.UserService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -22,22 +24,32 @@ public class UserRestControllerV1 {
     }
 
     @GetMapping("/{id}")
-    public User getUserById(@PathVariable Long id) {
-        return userService.getUserById(id);
+    @PreAuthorize("hasAuthority('users:read')")
+    public User getUserById(@PathVariable Long id) throws NoUserUnderThisId {
+        return userService.findUserById(id);
     }
 
     @PostMapping("/new/add")
+    @PreAuthorize("hasAuthority('users:write')")
     public User saveUser(@RequestBody User user) throws UserNotSavedToDataBaseException {
         return userService.saveUser(user);
     }
 
     @DeleteMapping
+    @PreAuthorize("hasAuthority('users:write')")
     public void deleteAllUsers() {
         userService.deleteAllUsers();
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('users:write')")
     public void deleteUserById(@PathVariable Long id) {
         userService.deleteUserById(id);
+    }
+
+    @PutMapping("/update")
+    @PreAuthorize("hasAuthority('users:write')")
+    public User updateUser(@RequestBody User user) throws UserNotSavedToDataBaseException {
+        return userService.saveUser(user);
     }
 }

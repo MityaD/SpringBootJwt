@@ -13,7 +13,7 @@ spring:
 
 jwt:
   secretKey: proselyte
-  header: Autherization
+  header: Authorization
   expiration: 604800
 server:
   port: 8081
