@@ -4,6 +4,7 @@ import com.yakut.springbootjwt.dto.AuthenticationRequestDTO;
 import com.yakut.springbootjwt.models.User;
 import com.yakut.springbootjwt.repository.UserRepository;
 import com.yakut.springbootjwt.config.JwtTokenProvider;
+import com.yakut.springbootjwt.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -25,14 +26,14 @@ import java.util.Map;
 public class AuthenticationRestControllerV1 {
 
     private final AuthenticationManager authenticationManager;
-    private UserRepository userRepository;
+    private UserService userService;
     private JwtTokenProvider jwtTokenProvider;
 
     public AuthenticationRestControllerV1(AuthenticationManager authenticationManager,
-                                          UserRepository userRepository,
+                                          UserService userService,
                                           JwtTokenProvider jwtTokenProvider) {
         this.authenticationManager = authenticationManager;
-        this.userRepository = userRepository;
+        this.userService = userService;
         this.jwtTokenProvider = jwtTokenProvider;
     }
 
@@ -42,8 +43,7 @@ public class AuthenticationRestControllerV1 {
              authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                             request.getFirstName(),
                             request.getPassword()));
-            User user = userRepository.findByFirstName(request.getFirstName())
-                    .orElseThrow(() -> new UsernameNotFoundException("User doesn't exists"));
+            User user = userService.loadUserByUsername(request.getFirstName());
             String token = jwtTokenProvider.createToken(request.getFirstName(), user.getRole().name());
             Map<Object, Object> response = new HashMap<>();
             response.put("firstName", request.getFirstName());

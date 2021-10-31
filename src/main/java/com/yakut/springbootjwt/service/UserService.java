@@ -3,7 +3,6 @@ package com.yakut.springbootjwt.service;
 import com.yakut.springbootjwt.exception.NoUserUnderThisId;
 import com.yakut.springbootjwt.exception.UserNotSavedToDataBaseException;
 import com.yakut.springbootjwt.models.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
@@ -22,5 +21,5 @@ public interface UserService extends UserDetailsService {
     void deleteUserById(Long id);
 
     @Override
-    UserDetails loadUserByUsername(String firstName) throws UsernameNotFoundException;
+    User loadUserByUsername(String firstName) throws UsernameNotFoundException;
 }

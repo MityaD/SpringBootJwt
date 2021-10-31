@@ -22,13 +22,9 @@ public class UserServiceImpl implements UserService{
     private final UserRepository userRepository;
 
     @Override
-    public User saveUser(User user) throws UserNotSavedToDataBaseException {
-        try {
+    public User saveUser(User user) {
             log.info("Запись пользователя в базу данных");
             return userRepository.save(user);
-        } catch (DataIntegrityViolationException e) {
-            throw new UserNotSavedToDataBaseException("Пользователь не сохранен в базу данных", e);
-        }
     }
 
     @Transactional(readOnly = true)
@@ -59,9 +55,8 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public UserDetails loadUserByUsername(String firstName) throws UsernameNotFoundException {
-        User user = userRepository.findByFirstName(firstName).orElseThrow(() ->
+    public User loadUserByUsername(String firstName) throws UsernameNotFoundException {
+        return userRepository.findByFirstName(firstName).orElseThrow(() ->
                 new UsernameNotFoundException("User doesn't exists"));
-        return User.fromUser(user);
     }
 }
