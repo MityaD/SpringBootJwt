@@ -1,5 +1,6 @@
 package com.yakut.springbootjwt.config;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -13,14 +14,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final JwtConfigurer jwtConfigurer; 
-
-    public SecurityConfig(JwtConfigurer jwtConfigurer) { //todo лобмок зачем если ты им не пользуешься
-        this.jwtConfigurer = jwtConfigurer;
-    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
